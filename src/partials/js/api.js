@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://pixabay.com/api/';
-const KEY = '36718800-865d7f109e5b1a08d99b671a9';
+const KEY = '36764323-0d84548404e2da8cd858ae667';
 //searchValue - то, что ввел пользователь, page - страничка, на которую выводится результат с 40ка карточками
 async function fetchPictures(searchValue, page) {
   //data - объект из бэкэнда. Достань инфо по этому запросу
@@ -15,3 +15,4 @@ async function fetchPictures(searchValue, page) {
 }
 
 export { fetchPictures };
+

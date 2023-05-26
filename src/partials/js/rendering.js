@@ -1,4 +1,8 @@
 import { refs } from './refs';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+const lightbox = new SimpleLightbox('.gallery a');
 
 function renderPicture(arr) {
   if (!arr) return;
@@ -16,29 +20,32 @@ function renderPicture(arr) {
         downloads,
       }) => {
         //дозаполнить
-        return `<div class="photo-card">
-    <img src="${webformatURL}" href="${largeImageURL}" alt="" loading="lazy" />
-    <div class="info">
-      <p class="info-item">
-        <b>${likes}</b>
-      </p>
-      <p class="info-item">
-        <b>${views}</b>
-      </p>
-      <p class="info-item">
-        <b>${comments}</b>
-      </p>
-      <p class="info-item">
-        <b>${downloads}</b>
-      </p>
-    </div>
-  </div>`;
+      return `<div class="photo-card">
+    <a class="gallery-link" href="${largeImageURL}"><img src="${webformatURL}" alt="${tags}" loading="lazy" width="300"/></a>
+      <div class="info">
+        <p class="info-item">
+          <b>Likes ${likes}</b>
+        </p>
+        <p class="info-item">
+          <b>Views ${views}</b>
+        </p>
+        <p class="info-item">
+          <b>Comments ${comments}</b>
+        </p>
+        <p class="info-item">
+          <b>Downloads ${downloads}</b>
+        </p>
+      </div>
+    </div>`;
       }
     )
     .join('');
 
   //отправляем разметку в гэллэри в хтмл
   refs.gallery.insertAdjacentHTML('beforeend', markup);
+
+    lightbox.refresh();
+    console.log("1")
 }
 
 //функция очистки предыдущих результатов
@@ -46,4 +53,5 @@ function renderPicture(arr) {
 function clearResults() {
   refs.gallery.innerHTML = '';
 }
+
 export { renderPicture, clearResults };
