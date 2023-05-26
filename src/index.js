@@ -21,15 +21,17 @@ async function onSubmit(event) {
       'Please, enter the information you are looking for.'
     );
   }
+try {const { hits, totalHits } = await fetchPictures(searchQuery, currentPage);
 
-  const { hits, totalHits } = await fetchPictures(searchQuery, currentPage);
-  console.log(hits);
-  console.log(totalHits);
-
-  if (hits.length === 0) {
-    return Notiflix.Notify.failure(
-      'Sorry, there are no images matching your search query. Please try again.'
-    );
-  }
-  renderPicture(hits);
+if (hits.length === 0) {
+  return Notiflix.Notify.failure(
+    'Sorry, there are no images matching your search query. Please try again.'
+  );
+}
+renderPicture(hits);
+    
+} catch (error) {Notiflix.Notify.warning(`Warning!${error.message}`);
+    
+}
+  
 }
